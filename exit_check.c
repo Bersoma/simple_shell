@@ -33,7 +33,7 @@ int exit_check(char *line, int ret, char *argv[], int count)
 
 	if (count > 0)
 	{
-		if (strcmp(arr[0], "exit") == 0)
+		if (_strcmp(arr[0], "exit") == 0)
 		{
 			free(line);
 			free_arr(count);

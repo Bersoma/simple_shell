@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			strcpy(cmd, command);
+			_strcpy(cmd, command);
 			execve(cmd, parameters, environ);
 			free_arr(ret);
 		}

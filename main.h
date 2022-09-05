@@ -18,6 +18,9 @@ size_t n;
 struct stat st;
 
 /* Function Prototypes */
+int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
+char *_strcpy(char *dest, char *src);
 int read_cmd(char command[], char *parameters[], char *argv[]);
 void free_arr(int count);
 int exit_check(char *line, int ret, char *argv[], int count);

@@ -26,14 +26,14 @@ int read_cmd(char command[], char *parameters[], char *argv[])
 	count = 0;
 	while (token != NULL)
 	{
-		arr[count++] = strdup(token);
+		arr[count++] = _strdup(token);
 		token = strtok(NULL, " \n");
 	}
 
 	if (exit_check(line, ret, argv, count) == -2)
 		return (-2);
 
-	strcpy(command, arr[0]);
+	_strcpy(command, arr[0]);
 
 	for (i = 0; i < count; i++)
 	{
