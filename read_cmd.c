@@ -9,13 +9,12 @@
 int read_cmd(char command[], char *parameters[], char *argv[])
 {
 	int ret, i = 0, count = 0;
-	size_t n = 0;
 	char *token;
 	char *line = NULL;
-	struct stat st;
 
 	ret = getline(&line, &n, stdin);
 	fflush(stdin);
+	
 	if (ret == -1)
 	{
 		if (isatty(STDIN_FILENO))
