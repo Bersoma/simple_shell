@@ -6,33 +6,44 @@
 *
 * Return: returns nothing
 */
-void read_cmd(void)
+int read_cmd(char command[], char *parameters[])
 {
-	int ret, i = 0, j = 0;
+	int ret, i = 0, count = 0;
 	size_t n = 0;
-	char *arr[100], *token;
-
-	line = NULL;
+	char *token;
+	char *line = NULL;
 
 	ret = getline(&line, &n, stdin);
-	if (ret == -1 || ret == 0)
+	fflush(stdin);
+	if (ret == -1)
 	{
-	/*	free(line);
 		printf("\n");
-	*/	_exit(0);
+		free(line);
+		_exit(69);
 	}
+	else if (ret == 1)
+	{
+		free(line);
+		return (-2);
+	}	
 
 	token = strtok(line, " \n");
 
+	count = 0;
 	while (token != NULL)
 	{
-		arr[i++] = strdup(token);
+		arr[count++] = strdup(token);
 		token = strtok(NULL, " \n");
 	}
 
 	strcpy(command, arr[0]);
 
-	for (j = 0; j < i; j++)
-		parameters[j] = arr[j];
-	parameters[i] = NULL;
+	for (i = 0; i < count; i++)
+	{
+		parameters[i] = arr[i];
+	}
+	parameters[count] = NULL;
+
+	free(line);
+	return (count);
 }

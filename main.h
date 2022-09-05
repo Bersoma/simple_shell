@@ -6,14 +6,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 /* Global Variables */
 extern char **environ;
-char command[1024];
-char *parameters[100];
-char *line;
+char *arr[100];
 
 /* Function Prototypes */
-void read_cmd(void);
+int read_cmd(char command[], char *parameters[]);
+void free_arr(int count);
 
 #endif /* MAIN_H */
