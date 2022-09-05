@@ -12,8 +12,7 @@
 int read_cmd(char command[], char *parameters[], char *argv[])
 {
 	int ret, i = 0, count = 0;
-	char *token;
-	char *line = NULL;
+	char *token, *line = NULL;
 
 	ret = getline(&line, &n, stdin);
 	fflush(stdin);
