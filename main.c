@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	{
 		process_counter++;
 		if (isatty(STDIN_FILENO))
-			printf("&-> ");
+			print_string("&-> ");
 
 		ret = read_cmd(command, parameters, argv);
 		if (ret == -2)

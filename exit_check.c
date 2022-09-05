@@ -20,7 +20,7 @@ int exit_check(char *line, int ret, char *argv[], int count)
 	if (ret == -1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("\n");
+			_putchar('\n');
 
 		free(line);
 		_exit(69);
@@ -42,7 +42,13 @@ int exit_check(char *line, int ret, char *argv[], int count)
 
 		if (stat(arr[0], &st) != 0)
 		{
-			printf("%s: %d: %s: not found\n", argv[0], process_counter, arr[0]);
+			print_string(argv[0]);
+			print_string(": ");
+			print_int(process_counter);
+			print_string(": ");
+			print_string(arr[0]);
+			print_string(": not found\n");
+
 			free(line);
 			free_arr(count);
 			return (-2);

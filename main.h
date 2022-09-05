@@ -18,6 +18,9 @@ size_t n;
 struct stat st;
 
 /* Function Prototypes */
+void _putchar(char c);
+void print_int(int n);
+void print_string(char *s);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
