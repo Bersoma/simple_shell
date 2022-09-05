@@ -4,19 +4,23 @@
 * main - a simple command line interpreter
 * Return: returns 0 on Success, 1 on error
 */
-int main(void)
+int main(int argc, char *argv[])
 {
 /*	int id, status, exit_status; */
 	int ret, id, status, exit_status;
 	char cmd[1024], command[1024], *parameters[100];
 
+	process_counter = 0;
+	(void) argc;
 	while (1)
 	{
+		process_counter++;
 		/* Display Prompt */
-		printf("&-> ");
+		if (isatty(STDIN_FILENO))
+			printf("&-> ");
 		fflush(stdout);
 
-		ret = read_cmd(command, parameters);
+		ret = read_cmd(command, parameters, argv);
 		if (ret == -2)
 		{
 		/* printf("You entered no characters\n");*/
@@ -28,7 +32,7 @@ int main(void)
 			/*printf("\nParent's Id: %d\n\n", getpid());*/
 			waitpid(id, &status, 0);
 			free_arr(ret);
-				
+
 			if (WIFEXITED(status))
 			{
 				exit_status = WEXITSTATUS(status);
@@ -37,7 +41,7 @@ int main(void)
 				{
 					exit(0);
 					/*kill(0, SIGINT);*/
-				}				
+				}
 			}
 		}
 		else
