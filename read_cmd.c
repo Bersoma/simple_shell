@@ -1,9 +1,12 @@
 #include "main.h"
 
 /**
-* read_cmd - updates the global variables command[] and parameters[]
-* from standard input
+* read_cmd - updates the variables command[] and parameters[] from stdin
+* @command: the first parameter entered into the shell
+* @parameters: every other parameter entered
+* @argv: command-line arguments entered in the parent process
 *
+* Description:
 * Return: returns nothing
 */
 int read_cmd(char command[], char *parameters[], char *argv[])
@@ -14,19 +17,9 @@ int read_cmd(char command[], char *parameters[], char *argv[])
 
 	ret = getline(&line, &n, stdin);
 	fflush(stdin);
-	
-	if (ret == -1)
-	{
-		if (isatty(STDIN_FILENO))
-			printf("\n");
-		free(line);
-		_exit(69);
-	}
-	else if (ret == 1)
-	{
-		free(line);
+
+	if (exit_check(line, ret, argv, count) == 1)
 		return (-2);
-	}
 
 	token = strtok(line, " \n");
 
@@ -37,13 +30,9 @@ int read_cmd(char command[], char *parameters[], char *argv[])
 		token = strtok(NULL, " \n");
 	}
 
-	if (stat(arr[0], &st) != 0)
-	{
-		printf("%s: %d: %s: not found\n", argv[0], process_counter, arr[0]);
-		free(line);
-		free_arr(count);
+	if (exit_check(line, ret, argv, count) == -2)
 		return (-2);
-	}
+
 	strcpy(command, arr[0]);
 
 	for (i = 0; i < count; i++)

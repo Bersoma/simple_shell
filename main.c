@@ -49,10 +49,6 @@ int main(int argc, char *argv[])
 			execve(cmd, parameters, environ);
 			free_arr(ret);
 		}
-		if (strcmp(command, "exit") == 0)
-		{
-			_exit(0);
-		}
 	}
 	 _exit(1);
 }

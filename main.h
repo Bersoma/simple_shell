@@ -20,6 +20,6 @@ struct stat st;
 /* Function Prototypes */
 int read_cmd(char command[], char *parameters[], char *argv[]);
 void free_arr(int count);
-int exit_check(char *line, int ret, char *argv[]);
+int exit_check(char *line, int ret, char *argv[], int count);
 
 #endif /* MAIN_H */
