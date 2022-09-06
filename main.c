@@ -3,7 +3,7 @@
 /**
 * main - a simple command line interpreter
 * @argc: the number of command-line arguments passed to the program
-* @argv: an array of strings containing every command-line argument
+* @arg: an array of strings containing every command-line argument
 *
 * Description: A simple UNIX command-line interpreter (Shell)
 * made by Igbinosa Ephraim
@@ -13,20 +13,19 @@
 *
 * Return: exits with 0 on Success, 1 on error
 */
-int main(int argc, char *argv[])
+int main(int argc, char *arg[])
 {
-	int ret, id, status, exit_status;
-	char cmd[1024], command[1024], *parameters[100];
+	int ret, id, status, exit_status, pc = 0;
+	char cmd[1024], cm[1024], *param[100], *arr[100];
 
-	process_counter = 0;
 	(void) argc;
 	while (1)
 	{
-		process_counter++;
+		pc++;
 		if (isatty(STDIN_FILENO))
 			print_string("&-> ");
 
-		ret = read_cmd(command, parameters, argv);
+		ret = read_cmd(cm, param, arg, pc, arr);
 		if (ret == -2)
 			continue;
 
@@ -34,7 +33,7 @@ int main(int argc, char *argv[])
 		if (id != 0)
 		{
 			waitpid(id, &status, 0);
-			free_arr(ret);
+			free_arr(ret, arr);
 
 			if (WIFEXITED(status))
 			{
@@ -45,9 +44,10 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			_strcpy(cmd, command);
-			execve(cmd, parameters, environ);
-			free_arr(ret);
+			_strcpy(cmd, cm);
+			if (execve(cmd, param, environ) == -1)
+				handle_errors();
+			free_arr(ret, arr);
 		}
 	}
 	 _exit(1);
