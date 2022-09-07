@@ -20,8 +20,9 @@ int read_cmd(char cm[], char *param[], char *arg[], int pc, char *arr[])
 
 	ret = getline(&line, &n, stdin);
 	fflush(stdin);
-
 	if (ext_chk(line, ret, arg, count, pc, arr) == 1)
+		return (-2);
+	if (is_space(line))
 		return (-2);
 
 	token = strtok(line, " \n");

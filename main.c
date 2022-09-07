@@ -23,7 +23,7 @@ int main(int argc, char *arg[])
 	{
 		pc++;
 		if (isatty(STDIN_FILENO))
-			print_string("&-> ");
+			print_string("$ ");
 
 		ret = read_cmd(cm, param, arg, pc, arr);
 		if (ret == -2)

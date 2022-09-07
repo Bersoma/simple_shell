@@ -27,6 +27,7 @@ node;
 extern char **environ;
 
 /* Function Prototypes */
+int is_space(char *line);
 void _putchar(char c);
 void print_int(int n);
 void print_string(char *s);
