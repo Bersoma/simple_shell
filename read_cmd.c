@@ -33,6 +33,7 @@ int read_cmd(char cm[], char *param[], char *arg[], int pc, char *arr[])
 		token = strtok(NULL, " \n");
 	}
 
+	/* status_chk(arr); */
 	if (ext_chk(line, ret, arg, count, pc, arr) == -2)
 		return (-2);
 

@@ -37,6 +37,9 @@ int read_cmd(char cm[], char *param[], char *arg[], int pc, char *arr[]);
 void free_arr(int count, char *arr[]);
 int ext_chk(char *line, int ret, char *arg[], int count, int pc, char *arr[]);
 void handle_errors(void);
-node *linked_path(void);
+void linked_path(node *head);
+void status_chk(char *arr[]);
+void print_ll(node *head);
+char *_getenv(const char *name);
 
 #endif /* MAIN_H */

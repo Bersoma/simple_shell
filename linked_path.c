@@ -1,24 +1,18 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-typedef struct node
+/**
+* linked_path - adds every directory in PATH variable to a linked list
+* @head: the head of the linked list
+*
+* Return: returns nothing
+*/
+void linked_path(node *head)
 {
-	char *str;
-	struct node *next;
-}
-node;
-
-int main(void)
-{
-	int i = 0;
 	char *path = _getenv("PATH");
 	char *token;
-	node head;
-	node *new = &head;
+	node *new = head;
 
-	head.next = NULL;
+	head->next = NULL;
 
 	token = strtok(path, ":");
 
@@ -26,20 +20,18 @@ int main(void)
 	{
 		new->next = malloc(sizeof(node));
 		if (!(new->next))
-			return (1);
+			return;
 		new = new->next;
 		new->str = token;
 		new->next = NULL;
 
 		token = strtok(NULL, ":");
 	}
-	new = &head;
+	new = head;
 	new = new->next;
-	while(new)
+	while (new)
 	{
 		printf("%s\n", new->str);
-		new = new->next; 
+		new = new->next;
 	}
-
-	return (0);
 }
